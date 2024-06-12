@@ -1,0 +1,5 @@
+project(radix-tree-src)
+set(srcs trie.cxx)
+add_library(radix-tree STATIC ${srcs})
+target_link_libraries(radix-tree compiler-flags)
+target_include_directories(radix-tree INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
