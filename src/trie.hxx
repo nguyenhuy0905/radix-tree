@@ -1,7 +1,6 @@
 #ifndef MY_TRIE_H
 #define MY_TRIE_H
 
-#include <algorithm>
 #include <memory>
 #include <string>
 #include <unordered_map>
