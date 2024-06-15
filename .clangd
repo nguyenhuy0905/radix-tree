@@ -1,0 +1,2 @@
+CompileFlags:
+  Add: ["-Isrc", "-Ibuild/_deps/googletest-src/googletest"]
