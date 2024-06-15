@@ -1,10 +1,20 @@
 project(radix-tree-test)
-set(test-srcs test-radix-tree.cxx)
-add_executable(radix-test ${test-srcs})
-target_link_libraries(radix-test radix-tree compiler-flags GTest::gtest_main)
-add_custom_command(
-  TARGET radix-test
-  POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:radix-test>"
-          "${CMAKE_SOURCE_DIR}/$<TARGET_FILE_NAME:radix-test>"
-  COMMENT "Copying test executable to project root")
+
+# an arbitrary list to see what the testing files are
+set(test_list 
+test_radix-tree-contains.cxx
+test_radix-tree-insert.cxx
+test_radix-tree-remove.cxx
+)
+
+# for clangd to work, I must add in stuff, manually, which is painful
+set(link_libs radix-tree compiler-flags GTest::gtest_main)
+add_executable(test-radix ${test_list})
+target_link_libraries(test-radix ${link_libs})
+
+enable_testing()
+# include(GoogleTest)
+
+# I need to manually add each test in for the GUI tools to recognize them.
+# I hate CMake.
+add_test(NAME test-radix COMMAND test-radix)
