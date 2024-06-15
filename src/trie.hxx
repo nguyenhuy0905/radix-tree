@@ -56,7 +56,7 @@ class RadixTree {
          *
          * @param k
          */
-        auto contains_key(char k) -> bool { return edge_list.contains(k); }
+        auto contains_key(char k) -> bool { return edge_list.count(k) != 0; }
 
         /**
          * @brief Inserts an edge with the specified word into this node's edge
