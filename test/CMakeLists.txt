@@ -1,20 +1,18 @@
 project(radix-tree-test)
 
-# an arbitrary list to see what the testing files are
-set(test_list 
-test_radix-tree-contains.cxx
-test_radix-tree-insert.cxx
-test_radix-tree-remove.cxx
-)
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG f8d7d77)
 
-# for clangd to work, I must add in stuff, manually, which is painful
-set(link_libs radix-tree compiler-flags GTest::gtest_main)
-add_executable(test-radix ${test_list})
-target_link_libraries(test-radix ${link_libs})
+FetchContent_MakeAvailable(googletest)
 
 enable_testing()
-# include(GoogleTest)
+include(GoogleTest)
 
-# I need to manually add each test in for the GUI tools to recognize them.
-# I hate CMake.
-add_test(NAME test-radix COMMAND test-radix)
+add_executable(test-tree test_radix-tree.cxx)
+target_link_libraries(test-tree PRIVATE compiler-flags GTest::gtest_main
+                                        radix-tree)
+
+gtest_discover_tests(test-tree)

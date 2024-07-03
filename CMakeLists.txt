@@ -5,15 +5,10 @@ set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG f8d7d77)
-FetchContent_MakeAvailable(googletest)
-
 add_library(compiler-flags INTERFACE)
 target_compile_features(compiler-flags INTERFACE cxx_std_23)
 target_compile_options(compiler-flags INTERFACE -pedantic -Wall -Wextra)
+
+include(Options.cmake)
+
 add_subdirectory(src)
-add_subdirectory(test)
